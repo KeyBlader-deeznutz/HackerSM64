@@ -11,13 +11,13 @@
 static struct ObjectHitbox sGoombaHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
-    /* numLootCoins:      */ 1,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 72,
     /* height:            */ 50,
-    /* hurtboxRadius:     */ 42,
-    /* hurtboxHeight:     */ 40,
+    /* hurtboxRadius:     */ 72,
+    /* hurtboxHeight:     */ 50,
 };
 
 /**
@@ -114,8 +114,7 @@ void bhv_goomba_init(void) {
     o->oDeathSound = sGoombaProperties[o->oGoombaSize].deathSound;
 
     obj_set_hitbox(o, &sGoombaHitbox);
-
-    o->oDrawingDistance = sGoombaProperties[o->oGoombaSize].drawDistance;
+    o->oDrawingDistance = 200000;
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
@@ -137,13 +136,13 @@ static void goomba_begin_jump(void) {
  * comes back.
  */
 static void mark_goomba_as_dead(void) {
-    if (o->parentObj != o) {
-        set_object_respawn_info_bits(o->parentObj,
-                                     (o->oBehParams2ndByte & GOOMBA_BP_TRIPLET_FLAG_MASK) >> 2);
-
-        o->parentObj->oBehParams =
-            o->parentObj->oBehParams | (o->oBehParams2ndByte & GOOMBA_BP_TRIPLET_FLAG_MASK) << 6;
-    }
+    
+    if (gMarioState->numCoins <= 48)
+            gMarioState->numCoins += 1;
+    else {
+        struct Object *coinObj;
+        coinObj = spawn_object(gMarioState->marioObj, MODEL_NONE, bhvOneCoin);               
+}
 }
 
 /**
@@ -153,10 +152,10 @@ static void mark_goomba_as_dead(void) {
 static void goomba_act_walk(void) {
     treat_far_home_as_mario(1000.0f);
 
-    obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);
+    obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.8f);
 
     // If walking fast enough, play footstep sounds
-    if (o->oGoombaRelativeSpeed > 4.0f / 3.0f) {
+    if (o->oGoombaRelativeSpeed > 40.0f / 3.0f) {
         cur_obj_play_sound_at_anim_range(2, 17, SOUND_OBJ_GOOMBA_WALK);
     }
 

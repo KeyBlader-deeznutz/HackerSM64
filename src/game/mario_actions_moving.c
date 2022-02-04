@@ -510,13 +510,13 @@ s32 should_begin_sliding(struct MarioState *m) {
 
 s32 check_ground_dive_or_punch(struct MarioState *m) {
     if (m->input & INPUT_B_PRESSED) {
-        //! Speed kick (shoutouts to SimpleFlips)
-        if (m->forwardVel >= 29.0f && m->controller->stickMag > 48.0f) {
-            m->vel[1] = 20.0f;
-            return set_mario_action(m, ACT_DIVE, 1);
-        }
+         struct Object *flameObj;
+        flameObj = spawn_object(m->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);   
+            flameObj->oMoveAngleYaw = m->faceAngle[1];
+            flameObj->oHeldState = HELD_THROWN;
 
-        return set_mario_action(m, ACT_MOVE_PUNCHING, 0);
+
+    
     }
 
     return FALSE;
@@ -1066,7 +1066,10 @@ s32 act_braking(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_MOVE_PUNCHING, 0);
+          struct Object *flameObj;
+        flameObj = spawn_object(m->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);   
+            flameObj->oMoveAngleYaw = m->faceAngle[1];
+            flameObj->oHeldState = HELD_THROWN;
     }
 
     switch (perform_ground_step(m)) {
@@ -1482,11 +1485,10 @@ s32 act_crouch_slide(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        if (m->forwardVel >= 10.0f) {
-            return set_mario_action(m, ACT_SLIDE_KICK, 0);
-        } else {
-            return set_mario_action(m, ACT_MOVE_PUNCHING, 0x0009);
-        }
+          struct Object *flameObj;
+        flameObj = spawn_object(m->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);   
+            flameObj->oMoveAngleYaw = m->faceAngle[1];
+            flameObj->oHeldState = HELD_THROWN;
     }
 
     if (m->input & INPUT_A_PRESSED) {

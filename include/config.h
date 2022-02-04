@@ -15,7 +15,7 @@
 // -- ROM SETTINGS --
 // Internal ROM name. NEEDS TO BE **EXACTLY** 20 CHARACTERS. Can't be 19 characters, can't be 21 characters. You can fill it with spaces.
 // The end quote should be here:               "
-#define INTERNAL_ROM_NAME "SUPERMARIO64        "
+#define INTERNAL_ROM_NAME "SUPERMAN  64        "
 // Support Rumble Pak
 // Currently not recommended, as it may cause random crashes.
 //#define ENABLE_RUMBLE (1 || VERSION_SH)
@@ -42,7 +42,7 @@
 // Air/Breath meter is separate from health meter when underwater
 //#define BREATH_METER
 // Number of coins to spawn the "100 coin" star. If you remove the define altogether, then there won't be a 100 coin star at all.
-#define X_COIN_STAR 100
+#define X_COIN_STAR 50
 // Stars don't kick you out of the level
 //#define NON_STOP_STARS
 // Uncomment this if you want global star IDs (useful for creating an open world hack ala MVC)
@@ -58,17 +58,17 @@
 
 // -- EXIT COURSE SETTINGS --
 // Disable exit course
-//#define DISABLE_EXIT_COURSE
-#ifndef DISABLE_EXIT_COURSE // safeguard
+#define DISABLE_EXIT_COURSE
+//#ifndef DISABLE_EXIT_COURSE // safeguard
 // Decides whether you can exit course while moving (has no effect if you disable exit course)
 // #define EXIT_COURSE_WHILE_MOVING
 // Decides which level "exit course" takes you to (has no effect if you disable exit course)
-#define EXIT_COURSE_LEVEL LEVEL_CASTLE
+#define EXIT_COURSE_LEVEL LEVEL_BOB
 // Decides the area node "exit course" takes you to (has no effect if you disable exit course)
 #define EXIT_COURSE_AREA 0x01
 // Decides the warp node "exit course" takes you to (has no effect if you disable exit course)
 #define EXIT_COURSE_NODE 0x1F
-#endif // DISABLE_EXIT_COURSE
+//#endif // DISABLE_EXIT_COURSE
 
 // -- MOVEMENT SETTINGS --
 // Fixes Mario's turn radius by making it dependent on forward speed.
@@ -143,7 +143,7 @@
 // Skip peach letter cutscene
 #define PEACH_SKIP
 // Uncomment this if you want to skip the title screen (Super Mario 64 logo)
-//#define SKIP_TITLE_SCREEN
+#define SKIP_TITLE_SCREEN
 // Uncomment this if you want to keep the mario head and not skip it
 //#define KEEP_MARIO_HEAD
 // Goddard easter egg from Shindou (has no effect if KEEP_MARIO_HEAD is disabled)

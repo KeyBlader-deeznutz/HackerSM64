@@ -49,13 +49,30 @@ s32 check_common_idle_cancels(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_PUNCHING, 0);
+        struct Object *flameObj;
+        flameObj = spawn_object_relative(0,0,0,100,m->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);   
+            flameObj->oMoveAngleYaw = m->faceAngle[1];
+            flameObj->oHeldState = HELD_THROWN;
+           
+           
+           //s16 behaviorParam, s16 relativePosX, s16 relativePosY, s16 relativePosZ,
+                // struct Object *parent, s32 model, const BehaviorScript *behavior)
+
+                //  flameObj = spawn_object(m->marioObj, MODEL_BLACK_BOBOMB, bhvBobomb);   
+                // spawn_object(struct Object *parent, s32 model, const BehaviorScript *behavior)
+            //flameObj->oInteractStatus |= INT_STATUS_MARIO_DROP_OBJECT;
+        //set_animation_mario(m, MARIO_ANIM_GROUND_THROW);
+        //struct Object *flameObj;
+        //flameObj = spawn_object(gMarioObject, MODEL_RED_FLAME, bhvBouncingFireballFlame);   
     }
 
     if (m->input & INPUT_Z_DOWN) {
         return set_mario_action(m, ACT_START_CROUCHING, 0);
+        
     }
-
+   // if (m->input & INPUT_L_PRESSED) {
+    
+    //}
     return FALSE;
 }
 

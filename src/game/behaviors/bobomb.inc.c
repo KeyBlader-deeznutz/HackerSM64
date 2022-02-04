@@ -13,8 +13,8 @@ static struct ObjectHitbox sBobombHitbox = {
 };
 
 void bhv_bobomb_init(void) {
-    o->oGravity  = 2.5f;
-    o->oFriction = 0.8f;
+    o->oGravity  = 0.1f;
+    o->oFriction = 1.0f;
     o->oBuoyancy = 1.3f;
     o->oInteractionSubtype = INT_SUBTYPE_KICKABLE;
 }
@@ -33,10 +33,10 @@ void bobomb_act_explode(void) {
         cur_obj_scale(1.0f + (f32) o->oTimer / 5.0f);
     else {
         explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-        explosion->oGraphYOffset += 100.0f;
+      explosion->oGraphYOffset += 100.0f;
 
-        bobomb_spawn_coin();
-        create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        //bobomb_spawn_coin();
+       // create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }
@@ -199,8 +199,8 @@ void bobomb_thrown_loop(void) {
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState  = 0;
     o->oFlags     &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW; /* bit 3 */
-    o->oForwardVel = 25.0f;
-    o->oVelY       = 20.0f;
+    o->oForwardVel = 500.0f;
+    o->oVelY       = 0.4f;
     o->oAction     = BOBOMB_ACT_LAUNCHED;
 }
 
@@ -403,7 +403,7 @@ void bobomb_buddy_actions(void) {
             break;
     }
 
-    set_object_visibility(o, 3000);
+    set_object_visibility(o, 16000);
 }
 
 void bhv_bobomb_buddy_loop(void) {
